@@ -1,0 +1,1586 @@
+
+           ___      .______        ______  __    __  .______      
+          /   \     |   _  \      /      ||  |  |  | |   _  \     
+         /  ^  \    |  |_)  |    |  ,----'|  |__|  | |  |_)  |    
+        /  /_\  \   |      /     |  |     |   __   | |      /     
+       /  _____  \  |  |\  \\___ |  `----.|  |  |  | |  |\  \\___.
+      /__/     \__\ | _| `._____| \______||__|  |__| | _| `._____|
+    
+Logging With ArchR!
+
+Start Time : 2021-11-18 16:12:50
+
+------- ArchR Info
+
+ArchRThreads = 1
+ArchRGenome = Hg19
+
+------- System Info
+
+Computer OS = unix
+Total Cores = 64
+
+------- Session Info
+
+R version 3.6.1 (2019-07-05)
+Platform: x86_64-conda_cos6-linux-gnu (64-bit)
+Running under: Red Hat Enterprise Linux 8.4 (Ootpa)
+
+Matrix products: default
+BLAS/LAPACK: /data/cli_anaconda3/cli_conda_env/archr/lib/libopenblasp-r0.3.12.so
+
+locale:
+ [1] LC_CTYPE=en_US.UTF-8       LC_NUMERIC=C               LC_TIME=en_US.UTF-8        LC_COLLATE=en_US.UTF-8     LC_MONETARY=en_US.UTF-8   
+ [6] LC_MESSAGES=en_US.UTF-8    LC_PAPER=en_US.UTF-8       LC_NAME=C                  LC_ADDRESS=C               LC_TELEPHONE=C            
+[11] LC_MEASUREMENT=en_US.UTF-8 LC_IDENTIFICATION=C       
+
+attached base packages:
+[1] parallel  stats4    stats     graphics  grDevices utils     datasets  methods   base     
+
+other attached packages:
+ [1] BSgenome.Hsapiens.UCSC.hg19_1.4.0 BSgenome_1.54.0                   rtracklayer_1.46.0                Biostrings_2.54.0                
+ [5] XVector_0.26.0                    pheatmap_1.0.12                   stringr_1.4.0                     future_1.23.0                    
+ [9] ArchR_1.0.1                       magrittr_2.0.1                    rhdf5_2.30.1                      Matrix_1.3-4                     
+[13] data.table_1.14.2                 SummarizedExperiment_1.16.1       DelayedArray_0.12.3               BiocParallel_1.20.1              
+[17] matrixStats_0.61.0                Biobase_2.46.0                    GenomicRanges_1.38.0              GenomeInfoDb_1.22.1              
+[21] IRanges_2.20.2                    S4Vectors_0.24.4                  BiocGenerics_0.32.0               ggplot2_3.3.5                    
+[25] gplots_3.1.1                      Seurat_3.1.2                     
+
+loaded via a namespace (and not attached):
+  [1] TH.data_1.1-0            Rtsne_0.15               colorspace_2.0-2         ellipsis_0.3.2           ggridges_0.5.3           leiden_0.3.9            
+  [7] listenv_0.8.0            ggrepel_0.9.1            fansi_0.5.0              mvtnorm_1.1-3            mathjaxr_1.4-0           codetools_0.2-18        
+ [13] splines_3.6.1            R.methodsS3_1.8.1        mnormt_2.0.2             TFisher_0.2.0            jsonlite_1.7.2           Rsamtools_2.2.3         
+ [19] ica_1.0-2                cluster_2.1.2            png_0.1-7                R.oo_1.24.0              uwot_0.1.10              sctransform_0.3.2       
+ [25] compiler_3.6.1           httr_1.4.2               assertthat_0.2.1         fastmap_1.1.0            lazyeval_0.2.2           htmltools_0.5.2         
+ [31] tools_3.6.1              rsvd_1.0.0               igraph_1.2.8             GenomeInfoDbData_1.2.2   gtable_0.3.0             glue_1.5.0              
+ [37] RANN_2.6.1               reshape2_1.4.4           dplyr_1.0.7              Rcpp_1.0.7               vctrs_0.3.8              multtest_2.42.0         
+ [43] ape_5.5                  nlme_3.1-153             lmtest_0.9-39            globals_0.14.0           rbibutils_2.2.4          lifecycle_1.0.1         
+ [49] irlba_2.3.3              gtools_3.9.2             XML_3.99-0.3             zlibbioc_1.32.0          MASS_7.3-54              zoo_1.8-9               
+ [55] scales_1.1.1             sandwich_3.0-1           RColorBrewer_1.1-2       reticulate_1.22          pbapply_1.5-0            gridExtra_2.3           
+ [61] stringi_1.7.5            mutoss_0.1-12            plotrix_3.8-2            caTools_1.18.2           Rdpack_2.1.2             SDMTools_1.1-221        
+ [67] rlang_0.4.12             pkgconfig_2.0.3          bitops_1.0-7             lattice_0.20-45          Rhdf5lib_1.8.0           ROCR_1.0-11             
+ [73] purrr_0.3.4              GenomicAlignments_1.22.1 htmlwidgets_1.5.4        cowplot_1.1.1            tidyselect_1.1.1         parallelly_1.28.1       
+ [79] RcppAnnoy_0.0.19         plyr_1.8.6               R6_2.5.1                 generics_0.1.1           multcomp_1.4-17          DBI_1.1.1               
+ [85] pillar_1.6.4             withr_2.4.2              sn_2.0.0                 fitdistrplus_1.1-6       RCurl_1.98-1.5           survival_3.2-13         
+ [91] tibble_3.1.6             future.apply_1.8.1       tsne_0.1-3               crayon_1.4.2             KernSmooth_2.23-20       utf8_1.2.2              
+ [97] tmvnsim_1.0-2            plotly_4.10.0            grid_3.6.1               metap_1.6                digest_0.6.28            tidyr_1.1.4             
+[103] numDeriv_2016.8-1.1      R.utils_2.11.0           munsell_0.5.0            viridisLite_0.4.0       
+
+
+------- Log Info
+
+
+2021-11-18 16:12:50 : createArrowFiles Input-Parameters, Class = list
+
+createArrowFiles Input-Parameters$inputFiles: length = 3
+                                      scATAC_BMMC_R1                                  scATAC_CD34_BMMC_R1 
+     "HemeFragments/scATAC_BMMC_R1.fragments.tsv.gz" "HemeFragments/scATAC_CD34_BMMC_R1.fragments.tsv.gz" 
+                                      scATAC_PBMC_R1 
+     "HemeFragments/scATAC_PBMC_R1.fragments.tsv.gz" 
+
+
+createArrowFiles Input-Parameters$sampleNames: length = 3
+[1] "scATAC_BMMC_R1"      "scATAC_CD34_BMMC_R1" "scATAC_PBMC_R1"     
+
+
+createArrowFiles Input-Parameters$outputNames: length = 3
+[1] "scATAC_BMMC_R1"      "scATAC_CD34_BMMC_R1" "scATAC_PBMC_R1"     
+
+
+createArrowFiles Input-Parameters$validBarcodes: length = 0
+NULL
+
+
+createArrowFiles Input-Parameters$minTSS: length = 1
+[1] 4
+
+
+createArrowFiles Input-Parameters$minFrags: length = 1
+[1] 1000
+
+
+createArrowFiles Input-Parameters$maxFrags: length = 1
+[1] 1e+05
+
+
+createArrowFiles Input-Parameters$QCDir: length = 1
+[1] "QualityControl"
+
+
+createArrowFiles Input-Parameters$nucLength: length = 1
+[1] 147
+
+
+createArrowFiles Input-Parameters$promoterRegion: length = 2
+[1] 2000  100
+
+
+createArrowFiles Input-Parameters$excludeChr: length = 2
+[1] "chrM" "chrY"
+
+
+createArrowFiles Input-Parameters$nChunk: length = 1
+[1] 5
+
+
+createArrowFiles Input-Parameters$bcTag: length = 1
+[1] "qname"
+
+
+createArrowFiles Input-Parameters$gsubExpression: length = 0
+NULL
+
+
+createArrowFiles Input-Parameters$bamFlag: length = 0
+NULL
+
+
+createArrowFiles Input-Parameters$offsetPlus: length = 1
+[1] 4
+
+
+createArrowFiles Input-Parameters$offsetMinus: length = 1
+[1] -5
+
+
+createArrowFiles Input-Parameters$addTileMat: length = 1
+[1] TRUE
+
+
+createArrowFiles Input-Parameters$addGeneScoreMat: length = 1
+[1] TRUE
+
+
+createArrowFiles Input-Parameters$force: length = 1
+[1] TRUE
+
+
+createArrowFiles Input-Parameters$threads: length = 1
+[1] 1
+
+
+createArrowFiles Input-Parameters$parallelParam: length = 0
+NULL
+
+
+createArrowFiles Input-Parameters$subThreading: length = 1
+[1] TRUE
+
+
+createArrowFiles Input-Parameters$verbose: length = 1
+[1] TRUE
+
+
+createArrowFiles Input-Parameters$cleanTmp: length = 1
+[1] TRUE
+
+
+createArrowFiles Input-Parameters$logFile: length = 1
+[1] "ArchRLogs/ArchR-createArrows-978c4647a912e-Date-2021-11-18_Time-16-12-50.log"
+
+
+createArrowFiles Input-Parameters$filterFrags: length = 1
+[1] 1000
+
+
+createArrowFiles Input-Parameters$filterTSS: length = 1
+[1] 4
+
+
+
+2021-11-18 16:12:50 : Cleaning Temporary Files
+2021-11-18 16:12:50 : Batch Execution w/ safelapply!, 0 mins elapsed.
+
+###########
+2021-11-18 16:12:50 : Creating Arrow File scATAC_CD34_BMMC_R1.arrow (scATAC_CD34_BMMC_R1 : 1 of 3)
+###########
+
+
+2021-11-18 16:12:50 : validBC, Class = NULL
+
+validBC: length = 0
+NULL
+
+
+
+2021-11-18 16:12:50 : (scATAC_CD34_BMMC_R1 : 1 of 3) Checking if completed file exists!
+2021-11-18 16:12:50 : (scATAC_CD34_BMMC_R1 : 1 of 3) Arrow Exists! Overriding since force = TRUE!, 0.001 mins elapsed.
+
+2021-11-18 16:12:50 : (scATAC_CD34_BMMC_R1 : 1 of 3) Determining Arrow Method to use!
+2021-11-18 16:12:50 : (scATAC_CD34_BMMC_R1 : 1 of 3) Reading In Fragments from inputFiles (readMethod = tabix), 0.001 mins elapsed.
+2021-11-18 16:12:50 : (scATAC_CD34_BMMC_R1 : 1 of 3) Tabix Bed To Temporary File, 0.001 mins elapsed.
+
+2021-11-18 16:12:50 : tileChromSizes, Class = GRanges
+GRanges object with 120 ranges and 1 metadata column:
+        seqnames              ranges strand |     chunkName
+           <Rle>           <IRanges>  <Rle> |   <character>
+    [1]     chr1          1-49850124      * |   chr1#chunk1
+    [2]     chr1   49850125-99700248      * |   chr1#chunk2
+    [3]     chr1  99700249-149550372      * |   chr1#chunk3
+    [4]     chr1 149550373-199400496      * |   chr1#chunk4
+    [5]     chr1 199400497-249250621      * |   chr1#chunk5
+    ...      ...                 ...    ... .           ...
+  [116]     chrY          1-11874713      * | chrY#chunk116
+  [117]     chrY   11874714-23749426      * | chrY#chunk117
+  [118]     chrY   23749427-35624139      * | chrY#chunk118
+  [119]     chrY   35624140-47498852      * | chrY#chunk119
+  [120]     chrY   47498853-59373566      * | chrY#chunk120
+  -------
+  seqinfo: 24 sequences from an unspecified genome; no seqlengths
+
+
+2021-11-18 16:12:52 : (scATAC_CD34_BMMC_R1 : 1 of 3) .tabixToTmp Fragments-Chunk-(1 of 120)-chr1:1-49850124, Class = data.table
+ 
+2021-11-18 16:12:52 : (scATAC_CD34_BMMC_R1 : 1 of 3) .tabixToTmp Fragments-Chunk-(1 of 120)-chr1:1-49850124, Class = data.frame
+(scATAC_CD34_BMMC_R1 : 1 of 3) .tabixToTmp Fragments-Chunk-(1 of 120)-chr1:1-49850124: nRows = 456085, nCols = 3
+      V2    V3                 V4
+1: 10103 10197 ATTTGTCTCAATCGTG-1
+2: 10498 10536 CACATGAGTGATAAGT-1
+3: 10595 10654 GCATTCCTCGTTGTTT-1
+4: 17298 17508 TGTACAGAGGTAGGAA-1
+5: 87244 87302 GTGGATTCAATGACTC-1
+6: 87353 87572 TGCTTTAGTAACAATG-1
+
+
+
+2021-11-18 16:12:52 : (scATAC_CD34_BMMC_R1 : 1 of 3) .tabixToTmp Barcodes-Chunk-(1 of 120)-chr1:1-49850124, Class = factor
+
+(scATAC_CD34_BMMC_R1 : 1 of 3) .tabixToTmp Barcodes-Chunk-(1 of 120)-chr1:1-49850124: length = 3700
+[1] ATTTGTCTCAATCGTG-1 CACATGAGTGATAAGT-1 GCATTCCTCGTTGTTT-1 TGTACAGAGGTAGGAA-1 GTGGATTCAATGACTC-1 TGCTTTAGTAACAATG-1
+3700 Levels: AAACGAAAGAAGAGTG-1 AAACGAACAAGGCGTA-1 AAACGAACACTGTTAG-1 AAACGAACATGCACTA-1 AAACGAATCGTATAGC-1 AAACTCGAGACACTTC-1 ... TTTGTGTTCCGCGATG-1
+
+
+2021-11-18 16:13:05 : (scATAC_CD34_BMMC_R1 : 1 of 3) Reading TabixFile 8 Percent, 0.251 mins elapsed.
+2021-11-18 16:13:17 : (scATAC_CD34_BMMC_R1 : 1 of 3) Reading TabixFile 17 Percent, 0.454 mins elapsed.
+2021-11-18 16:13:29 : (scATAC_CD34_BMMC_R1 : 1 of 3) Reading TabixFile 25 Percent, 0.643 mins elapsed.
+2021-11-18 16:13:40 : (scATAC_CD34_BMMC_R1 : 1 of 3) Reading TabixFile 33 Percent, 0.837 mins elapsed.
+2021-11-18 16:13:53 : (scATAC_CD34_BMMC_R1 : 1 of 3) Reading TabixFile 42 Percent, 1.049 mins elapsed.
+2021-11-18 16:14:07 : (scATAC_CD34_BMMC_R1 : 1 of 3) Reading TabixFile 50 Percent, 1.275 mins elapsed.
+2021-11-18 16:14:19 : (scATAC_CD34_BMMC_R1 : 1 of 3) Reading TabixFile 58 Percent, 1.478 mins elapsed.
+2021-11-18 16:14:31 : (scATAC_CD34_BMMC_R1 : 1 of 3) Reading TabixFile 67 Percent, 1.674 mins elapsed.
+2021-11-18 16:14:43 : (scATAC_CD34_BMMC_R1 : 1 of 3) Reading TabixFile 75 Percent, 1.89 mins elapsed.
+2021-11-18 16:14:54 : (scATAC_CD34_BMMC_R1 : 1 of 3) Reading TabixFile 83 Percent, 2.067 mins elapsed.
+2021-11-18 16:15:02 : (scATAC_CD34_BMMC_R1 : 1 of 3) Reading TabixFile 92 Percent, 2.204 mins elapsed.
+2021-11-18 16:15:08 : (scATAC_CD34_BMMC_R1 : 1 of 3) Reading TabixFile 100 Percent, 2.302 mins elapsed.
+2021-11-18 16:15:08 : (scATAC_CD34_BMMC_R1 : 1 of 3) Successful creation of Temporary File, 2.303 mins elapsed.
+2021-11-18 16:15:08 : (scATAC_CD34_BMMC_R1 : 1 of 3) Creating ArrowFile From Temporary File, 2.303 mins elapsed.
+
+2021-11-18 16:15:08 : (scATAC_CD34_BMMC_R1 : 1 of 3) chunkChrNames, Class = data.frame
+(scATAC_CD34_BMMC_R1 : 1 of 3) chunkChrNames: nRows = 114, nCols = 1
+     chunkNames
+1   chr1#chunk1
+2   chr1#chunk2
+3   chr1#chunk3
+4   chr1#chunk4
+5   chr1#chunk5
+6 chr10#chunk46
+
+
+2021-11-18 16:15:08 : (scATAC_CD34_BMMC_R1 : 1 of 3) Counting Unique Barcodes From Temporary File, 2.304 mins elapsed.
+
+2021-11-18 16:15:09 : (scATAC_CD34_BMMC_R1 : 1 of 3) BarcodeFrequencyTable, Class = data.table
+ 
+2021-11-18 16:15:09 : (scATAC_CD34_BMMC_R1 : 1 of 3) BarcodeFrequencyTable, Class = data.frame
+(scATAC_CD34_BMMC_R1 : 1 of 3) BarcodeFrequencyTable: nRows = 3723, nCols = 2
+            values.V1     V1
+1: CGCTGGAAGCATTGGG-1 101174
+2: GCGATCGTCCAGTACA-1  49593
+3: GCTTAAGAGCAGGAGG-1  41036
+4: GTTCAAGAGGTGTTGG-1  34766
+5: GCGTTGGGTTACGGAG-1  28914
+6: CAACGGCGTACCCACG-1  28658
+
+
+
+2021-11-18 16:15:09 : (scATAC_CD34_BMMC_R1 : 1 of 3) BarcodesMinMaxFrags, Class = data.frame
+(scATAC_CD34_BMMC_R1 : 1 of 3) BarcodesMinMaxFrags: nRows = 3391, nCols = 1
+                  bc
+1 GCGATCGTCCAGTACA-1
+2 GCTTAAGAGCAGGAGG-1
+3 GTTCAAGAGGTGTTGG-1
+4 GCGTTGGGTTACGGAG-1
+5 CAACGGCGTACCCACG-1
+6 ATTCGTTTCTCGTGAA-1
+
+
+
+2021-11-18 16:15:10 : (scATAC_CD34_BMMC_R1 : 1 of 3) Unique Chromosomes, Class = data.frame
+(scATAC_CD34_BMMC_R1 : 1 of 3) Unique Chromosomes: nRows = 24, nCols = 1
+   chr
+1 chr1
+2 chr2
+3 chr3
+4 chr4
+5 chr5
+6 chr6
+
+
+2021-11-18 16:15:10 : (scATAC_CD34_BMMC_R1 : 1 of 3) Adding Chromosome 1 of 24, 2.331 mins elapsed.
+
+2021-11-18 16:15:12 : (scATAC_CD34_BMMC_R1 : 1 of 3) .tmpToArrow Fragments-Chr-(1 of 24)-chr1, Class = IRanges
+
+(scATAC_CD34_BMMC_R1 : 1 of 3) .tmpToArrow Fragments-Chr-(1 of 24)-chr1: length = 1252791
+IRanges object with 6 ranges and 1 metadata column:
+          start       end     width |                 RG
+      <integer> <integer> <integer> |              <Rle>
+  [1]    862397    862437        41 | GCGATCGTCCAGTACA-1
+  [2]    919688    919724        37 | GCGATCGTCCAGTACA-1
+  [3]    947336    947439       104 | GCGATCGTCCAGTACA-1
+  [4]    953498    953780       283 | GCGATCGTCCAGTACA-1
+  [5]   1026618   1026671        54 | GCGATCGTCCAGTACA-1
+  [6]   1167120   1167165        46 | GCGATCGTCCAGTACA-1
+
+
+
+2021-11-18 16:15:12 : (scATAC_CD34_BMMC_R1 : 1 of 3) .tmpToArrow Barcodes-Chr-(1 of 24)-chr1, Class = data.frame
+(scATAC_CD34_BMMC_R1 : 1 of 3) .tmpToArrow Barcodes-Chr-(1 of 24)-chr1: nRows = 3391, nCols = 1
+                  bc
+1 GCGATCGTCCAGTACA-1
+2 GCTTAAGAGCAGGAGG-1
+3 GTTCAAGAGGTGTTGG-1
+4 GCGTTGGGTTACGGAG-1
+5 CAACGGCGTACCCACG-1
+6 ATTCGTTTCTCGTGAA-1
+
+
+2021-11-18 16:15:12 : (scATAC_CD34_BMMC_R1 : 1 of 3) Adding Chromosome 2 of 24, 2.372 mins elapsed.
+2021-11-18 16:15:14 : (scATAC_CD34_BMMC_R1 : 1 of 3) Adding Chromosome 3 of 24, 2.4 mins elapsed.
+2021-11-18 16:15:16 : (scATAC_CD34_BMMC_R1 : 1 of 3) Adding Chromosome 4 of 24, 2.425 mins elapsed.
+2021-11-18 16:15:17 : (scATAC_CD34_BMMC_R1 : 1 of 3) Adding Chromosome 5 of 24, 2.448 mins elapsed.
+2021-11-18 16:15:18 : (scATAC_CD34_BMMC_R1 : 1 of 3) Adding Chromosome 6 of 24, 2.471 mins elapsed.
+2021-11-18 16:15:20 : (scATAC_CD34_BMMC_R1 : 1 of 3) Adding Chromosome 7 of 24, 2.498 mins elapsed.
+2021-11-18 16:15:21 : (scATAC_CD34_BMMC_R1 : 1 of 3) Adding Chromosome 8 of 24, 2.522 mins elapsed.
+2021-11-18 16:15:23 : (scATAC_CD34_BMMC_R1 : 1 of 3) Adding Chromosome 9 of 24, 2.544 mins elapsed.
+2021-11-18 16:15:24 : (scATAC_CD34_BMMC_R1 : 1 of 3) Adding Chromosome 10 of 24, 2.566 mins elapsed.
+2021-11-18 16:15:26 : (scATAC_CD34_BMMC_R1 : 1 of 3) Adding Chromosome 11 of 24, 2.591 mins elapsed.
+2021-11-18 16:15:27 : (scATAC_CD34_BMMC_R1 : 1 of 3) Adding Chromosome 12 of 24, 2.614 mins elapsed.
+2021-11-18 16:15:28 : (scATAC_CD34_BMMC_R1 : 1 of 3) Adding Chromosome 13 of 24, 2.635 mins elapsed.
+2021-11-18 16:15:29 : (scATAC_CD34_BMMC_R1 : 1 of 3) Adding Chromosome 14 of 24, 2.653 mins elapsed.
+2021-11-18 16:15:30 : (scATAC_CD34_BMMC_R1 : 1 of 3) Adding Chromosome 15 of 24, 2.672 mins elapsed.
+2021-11-18 16:15:32 : (scATAC_CD34_BMMC_R1 : 1 of 3) Adding Chromosome 16 of 24, 2.691 mins elapsed.
+2021-11-18 16:15:33 : (scATAC_CD34_BMMC_R1 : 1 of 3) Adding Chromosome 17 of 24, 2.711 mins elapsed.
+2021-11-18 16:15:34 : (scATAC_CD34_BMMC_R1 : 1 of 3) Adding Chromosome 18 of 24, 2.734 mins elapsed.
+2021-11-18 16:15:35 : (scATAC_CD34_BMMC_R1 : 1 of 3) Adding Chromosome 19 of 24, 2.75 mins elapsed.
+2021-11-18 16:15:36 : (scATAC_CD34_BMMC_R1 : 1 of 3) Adding Chromosome 20 of 24, 2.773 mins elapsed.
+2021-11-18 16:15:38 : (scATAC_CD34_BMMC_R1 : 1 of 3) Adding Chromosome 21 of 24, 2.791 mins elapsed.
+2021-11-18 16:15:38 : (scATAC_CD34_BMMC_R1 : 1 of 3) Adding Chromosome 22 of 24, 2.806 mins elapsed.
+2021-11-18 16:15:39 : (scATAC_CD34_BMMC_R1 : 1 of 3) Adding Chromosome 23 of 24, 2.822 mins elapsed.
+2021-11-18 16:15:40 : (scATAC_CD34_BMMC_R1 : 1 of 3) Adding Chromosome 24 of 24, 2.839 mins elapsed.
+
+2021-11-18 16:15:40 : (scATAC_CD34_BMMC_R1 : 1 of 3) detected 0 Fragments for chrY
+2021-11-18 16:15:40 : (scATAC_CD34_BMMC_R1 : 1 of 3) Successful creation of Arrow File, 2.839 mins elapsed.
+2021-11-18 16:15:41 : (scATAC_CD34_BMMC_R1 : 1 of 3) Adding Fragment Summary, 2.85 mins elapsed.
+2021-11-18 16:15:43 : (scATAC_CD34_BMMC_R1 : 1 of 3) Plotting Fragment Size Distribution, 2.882 mins elapsed.
+2021-11-18 16:15:45 : (scATAC_CD34_BMMC_R1 : 1 of 3) Computing TSS Enrichment Scores, 2.917 mins elapsed.
+2021-11-18 16:16:33 : (scATAC_CD34_BMMC_R1 : 1 of 3) Computed TSS Scores!, 0.791 mins elapsed.
+2021-11-18 16:16:33 : (scATAC_CD34_BMMC_R1 : 1 of 3) CellStats : Number of Cells Pass Filter = 3275 , 3.708 mins elapsed.
+2021-11-18 16:16:33 : (scATAC_CD34_BMMC_R1 : 1 of 3) CellStats : Median Frags = 3163 , 3.708 mins elapsed.
+2021-11-18 16:16:33 : (scATAC_CD34_BMMC_R1 : 1 of 3) CellStats : Median TSS Enrichment = 16.726 , 3.708 mins elapsed.
+2021-11-18 16:16:33 : (scATAC_CD34_BMMC_R1 : 1 of 3) Plotting TSS Enrichment Scores, 3.709 mins elapsed.
+2021-11-18 16:16:33 : (scATAC_CD34_BMMC_R1 : 1 of 3) Adding Metadata to Fragments, 3.718 mins elapsed.
+2021-11-18 16:16:34 : (scATAC_CD34_BMMC_R1 : 1 of 3) Adding Additional Feature Counts!, 3.729 mins elapsed.
+2021-11-18 16:17:21 : (scATAC_CD34_BMMC_R1 : 1 of 3) Finished Adding Additional Feature Counts!, 4.521 mins elapsed.
+
+2021-11-18 16:17:21 : (scATAC_CD34_BMMC_R1 : 1 of 3) Metadata, Class = DFrame
+DataFrame with 3391 rows and 12 columns
+                                  cellNames    nFrags nMonoFrags  nDiFrags nMultiFrags TSSEnrichment ReadsInTSS      Keep ReadsInPromoter      PromoterRatio
+                                <character> <numeric>  <numeric> <numeric>   <numeric>     <numeric>  <numeric> <numeric>       <numeric>          <numeric>
+1    scATAC_CD34_BMMC_R1#GCGATCGTCCAGTACA-1     49593      37218     10503        1872         1.953        427         0            2896 0.0291976690258706
+2    scATAC_CD34_BMMC_R1#GCTTAAGAGCAGGAGG-1     41036      33716      6742         578         2.659        478         0            2814  0.034286967540696
+3    scATAC_CD34_BMMC_R1#GTTCAAGAGGTGTTGG-1     34766      17353     16114        1299         7.957       1756         1            7209  0.103678881665996
+4    scATAC_CD34_BMMC_R1#GCGTTGGGTTACGGAG-1     28914      14746     12944        1224         9.056       2186         1            8382  0.144947084457356
+5    scATAC_CD34_BMMC_R1#CAACGGCGTACCCACG-1     28658      23325      4829         504        10.385       2187         1            8348  0.145648684486007
+...                                     ...       ...        ...       ...         ...           ...        ...       ...             ...                ...
+3387 scATAC_CD34_BMMC_R1#GCTGCGATCTGAGTAC-1      1013        752       235          26        16.337        165         1             554  0.273445212240869
+3388 scATAC_CD34_BMMC_R1#GTCACCTTCGACTATG-1      1013        660       300          53        14.455        146         1             560  0.276406712734452
+3389 scATAC_CD34_BMMC_R1#CTCACCATCATGTTCT-1      1012        659       293          60        15.743        159         1             564  0.278656126482213
+3390 scATAC_CD34_BMMC_R1#CCGTACTCACAAACGG-1      1005        843       153           9         0.693          7         0              44 0.0218905472636816
+3391 scATAC_CD34_BMMC_R1#TAACGGTTCGCAACTA-1      1003        820       169          14         0.198          2         0              45 0.0224327018943171
+     ReadsInBlacklist      BlacklistRatio
+            <numeric>           <numeric>
+1                1134  0.0114330651503236
+2                 821  0.0100034116385613
+3                 552 0.00793879077259391
+4                 492 0.00850798920937954
+5                 542 0.00945634726777863
+...               ...                 ...
+3387               10 0.00493583415597236
+3388               18 0.00888450148075025
+3389               22  0.0108695652173913
+3390               14 0.00696517412935323
+3391               20 0.00997008973080758
+
+2021-11-18 16:17:21 : (scATAC_CD34_BMMC_R1 : 1 of 3) Removing Fragments from Filtered Cells, 4.522 mins elapsed.
+2021-11-18 16:17:21 : (scATAC_CD34_BMMC_R1 : 1 of 3) Creating Filtered Arrow File, 4.522 mins elapsed.
+
+2021-11-18 16:17:22 : (scATAC_CD34_BMMC_R1 : 1 of 3) .filterCellsFromArrow Fragments-Chr-(1 of 24)-chr1, Class = GRanges
+GRanges object with 1198781 ranges and 1 metadata column:
+            seqnames              ranges strand |                                     RG
+               <Rle>           <IRanges>  <Rle> |                                  <Rle>
+        [1]     chr1       792180-792221      * | scATAC_CD34_BMMC_R1#GTTCAAGAGGTGTTGG-1
+        [2]     chr1       805326-805364      * | scATAC_CD34_BMMC_R1#GTTCAAGAGGTGTTGG-1
+        [3]     chr1       805527-805595      * | scATAC_CD34_BMMC_R1#GTTCAAGAGGTGTTGG-1
+        [4]     chr1       878828-879125      * | scATAC_CD34_BMMC_R1#GTTCAAGAGGTGTTGG-1
+        [5]     chr1       904299-904343      * | scATAC_CD34_BMMC_R1#GTTCAAGAGGTGTTGG-1
+        ...      ...                 ...    ... .                                    ...
+  [1198777]     chr1 233443071-233443231      * | scATAC_CD34_BMMC_R1#CTCACCATCATGTTCT-1
+  [1198778]     chr1 235434186-235434263      * | scATAC_CD34_BMMC_R1#CTCACCATCATGTTCT-1
+  [1198779]     chr1 235668171-235668404      * | scATAC_CD34_BMMC_R1#CTCACCATCATGTTCT-1
+  [1198780]     chr1 248786000-248786224      * | scATAC_CD34_BMMC_R1#CTCACCATCATGTTCT-1
+  [1198781]     chr1 249200409-249200661      * | scATAC_CD34_BMMC_R1#CTCACCATCATGTTCT-1
+  -------
+  seqinfo: 1 sequence from an unspecified genome; no seqlengths
+
+
+2021-11-18 16:17:22 : (scATAC_CD34_BMMC_R1 : 1 of 3) .filterCellsFromArrow Barcodes-Chr-(1 of 24)-chr1, Class = data.frame
+(scATAC_CD34_BMMC_R1 : 1 of 3) .filterCellsFromArrow Barcodes-Chr-(1 of 24)-chr1: nRows = 3275, nCols = 1
+                                      bc
+1 scATAC_CD34_BMMC_R1#GTTCAAGAGGTGTTGG-1
+2 scATAC_CD34_BMMC_R1#GCGTTGGGTTACGGAG-1
+3 scATAC_CD34_BMMC_R1#CAACGGCGTACCCACG-1
+4 scATAC_CD34_BMMC_R1#ATTCGTTTCTCGTGAA-1
+5 scATAC_CD34_BMMC_R1#CAAGGCCAGGCTTTAC-1
+6 scATAC_CD34_BMMC_R1#TAATCGGGTTCGGGAA-1
+
+
+
+2021-11-18 16:17:38 : (scATAC_CD34_BMMC_R1 : 1 of 3) detected 0 Fragments for chrY
+2021-11-18 16:17:39 : (scATAC_CD34_BMMC_R1 : 1 of 3) Finished Constructing Filtered Arrow File!, 4.815 mins elapsed.
+2021-11-18 16:17:39 : (scATAC_CD34_BMMC_R1 : 1 of 3) Adding TileMatrix!, 4.816 mins elapsed.
+
+2021-11-18 16:17:43 : scATAC_CD34_BMMC_R1 .addTileMat FeatureDF, Class = DFrame
+DataFrame with 6072620 rows and 3 columns
+           seqnames       idx     start
+        <character> <integer> <numeric>
+1              chr1         1         0
+2              chr1         2       500
+3              chr1         3      1000
+4              chr1         4      1500
+5              chr1         5      2000
+...             ...       ...       ...
+6072616        chrX    310538 155268500
+6072617        chrX    310539 155269000
+6072618        chrX    310540 155269500
+6072619        chrX    310541 155270000
+6072620        chrX    310542 155270500
+
+2021-11-18 16:17:55 : Adding TileMatrix to scATAC_CD34_BMMC_R1 for Chr (1 of 23)!, 0.269 mins elapsed.
+
+2021-11-18 16:17:55 : NTiles_TileMatrix_1_chr1, Class = numeric
+
+NTiles_TileMatrix_1_chr1: length = 1
+  chr1 
+498502 
+
+
+
+2021-11-18 16:17:55 : NCells_TileMatrix_1_chr1, Class = integer
+
+NCells_TileMatrix_1_chr1: length = 1
+[1] 3275
+
+
+
+2021-11-18 16:17:55 : MinTile_TileMatrix_1_chr1, Class = numeric
+
+MinTile_TileMatrix_1_chr1: length = 1
+[1] 21
+
+
+
+2021-11-18 16:17:55 : MaxTile_TileMatrix_1_chr1, Class = numeric
+
+MaxTile_TileMatrix_1_chr1: length = 1
+[1] 498480
+
+
+
+2021-11-18 16:17:55 : MinCell_TileMatrix_1_chr1, Class = integer
+
+MinCell_TileMatrix_1_chr1: length = 1
+[1] 1
+
+
+
+2021-11-18 16:17:55 : MaxCell_TileMatrix_1_chr1, Class = integer
+
+MaxCell_TileMatrix_1_chr1: length = 1
+[1] 3275
+
+
+2021-11-18 16:17:58 : Adding TileMatrix to scATAC_CD34_BMMC_R1 for Chr (2 of 23)!, 0.313 mins elapsed.
+
+2021-11-18 16:17:58 : NTiles_TileMatrix_2_chr2, Class = numeric
+
+NTiles_TileMatrix_2_chr2: length = 1
+  chr2 
+486399 
+
+
+
+2021-11-18 16:17:58 : NCells_TileMatrix_2_chr2, Class = integer
+
+NCells_TileMatrix_2_chr2: length = 1
+[1] 3275
+
+
+
+2021-11-18 16:17:58 : MinTile_TileMatrix_2_chr2, Class = numeric
+
+MinTile_TileMatrix_2_chr2: length = 1
+[1] 22
+
+
+
+2021-11-18 16:17:58 : MaxTile_TileMatrix_2_chr2, Class = numeric
+
+MaxTile_TileMatrix_2_chr2: length = 1
+[1] 486309
+
+
+
+2021-11-18 16:17:58 : MinCell_TileMatrix_2_chr2, Class = integer
+
+MinCell_TileMatrix_2_chr2: length = 1
+[1] 1
+
+
+
+2021-11-18 16:17:58 : MaxCell_TileMatrix_2_chr2, Class = integer
+
+MaxCell_TileMatrix_2_chr2: length = 1
+[1] 3275
+
+
+2021-11-18 16:18:00 : Adding TileMatrix to scATAC_CD34_BMMC_R1 for Chr (3 of 23)!, 0.358 mins elapsed.
+
+2021-11-18 16:18:01 : NTiles_TileMatrix_3_chr3, Class = numeric
+
+NTiles_TileMatrix_3_chr3: length = 1
+  chr3 
+396045 
+
+
+
+2021-11-18 16:18:01 : NCells_TileMatrix_3_chr3, Class = integer
+
+NCells_TileMatrix_3_chr3: length = 1
+[1] 3275
+
+
+
+2021-11-18 16:18:01 : MinTile_TileMatrix_3_chr3, Class = numeric
+
+MinTile_TileMatrix_3_chr3: length = 1
+[1] 130
+
+
+
+2021-11-18 16:18:01 : MaxTile_TileMatrix_3_chr3, Class = numeric
+
+MaxTile_TileMatrix_3_chr3: length = 1
+[1] 395814
+
+
+
+2021-11-18 16:18:01 : MinCell_TileMatrix_3_chr3, Class = integer
+
+MinCell_TileMatrix_3_chr3: length = 1
+[1] 1
+
+
+
+2021-11-18 16:18:01 : MaxCell_TileMatrix_3_chr3, Class = integer
+
+MaxCell_TileMatrix_3_chr3: length = 1
+[1] 3275
+
+
+2021-11-18 16:18:03 : Adding TileMatrix to scATAC_CD34_BMMC_R1 for Chr (4 of 23)!, 0.4 mins elapsed.
+
+2021-11-18 16:18:03 : NTiles_TileMatrix_4_chr4, Class = numeric
+
+NTiles_TileMatrix_4_chr4: length = 1
+  chr4 
+382309 
+
+
+
+2021-11-18 16:18:03 : NCells_TileMatrix_4_chr4, Class = integer
+
+NCells_TileMatrix_4_chr4: length = 1
+[1] 3275
+
+
+
+2021-11-18 16:18:03 : MinTile_TileMatrix_4_chr4, Class = numeric
+
+MinTile_TileMatrix_4_chr4: length = 1
+[1] 21
+
+
+
+2021-11-18 16:18:03 : MaxTile_TileMatrix_4_chr4, Class = numeric
+
+MaxTile_TileMatrix_4_chr4: length = 1
+[1] 382089
+
+
+
+2021-11-18 16:18:03 : MinCell_TileMatrix_4_chr4, Class = integer
+
+MinCell_TileMatrix_4_chr4: length = 1
+[1] 1
+
+
+
+2021-11-18 16:18:03 : MaxCell_TileMatrix_4_chr4, Class = integer
+
+MaxCell_TileMatrix_4_chr4: length = 1
+[1] 3275
+
+
+2021-11-18 16:18:05 : Adding TileMatrix to scATAC_CD34_BMMC_R1 for Chr (5 of 23)!, 0.441 mins elapsed.
+
+2021-11-18 16:18:06 : NTiles_TileMatrix_5_chr5, Class = numeric
+
+NTiles_TileMatrix_5_chr5: length = 1
+  chr5 
+361831 
+
+
+
+2021-11-18 16:18:06 : NCells_TileMatrix_5_chr5, Class = integer
+
+NCells_TileMatrix_5_chr5: length = 1
+[1] 3275
+
+
+
+2021-11-18 16:18:06 : MinTile_TileMatrix_5_chr5, Class = numeric
+
+MinTile_TileMatrix_5_chr5: length = 1
+[1] 24
+
+
+
+2021-11-18 16:18:06 : MaxTile_TileMatrix_5_chr5, Class = numeric
+
+MaxTile_TileMatrix_5_chr5: length = 1
+[1] 361568
+
+
+
+2021-11-18 16:18:06 : MinCell_TileMatrix_5_chr5, Class = integer
+
+MinCell_TileMatrix_5_chr5: length = 1
+[1] 1
+
+
+
+2021-11-18 16:18:06 : MaxCell_TileMatrix_5_chr5, Class = integer
+
+MaxCell_TileMatrix_5_chr5: length = 1
+[1] 3275
+
+
+2021-11-18 16:18:08 : Adding TileMatrix to scATAC_CD34_BMMC_R1 for Chr (6 of 23)!, 0.479 mins elapsed.
+
+2021-11-18 16:18:08 : NTiles_TileMatrix_6_chr6, Class = numeric
+
+NTiles_TileMatrix_6_chr6: length = 1
+  chr6 
+342231 
+
+
+
+2021-11-18 16:18:08 : NCells_TileMatrix_6_chr6, Class = integer
+
+NCells_TileMatrix_6_chr6: length = 1
+[1] 3275
+
+
+
+2021-11-18 16:18:08 : MinTile_TileMatrix_6_chr6, Class = numeric
+
+MinTile_TileMatrix_6_chr6: length = 1
+[1] 406
+
+
+
+2021-11-18 16:18:08 : MaxTile_TileMatrix_6_chr6, Class = numeric
+
+MaxTile_TileMatrix_6_chr6: length = 1
+[1] 342093
+
+
+
+2021-11-18 16:18:08 : MinCell_TileMatrix_6_chr6, Class = integer
+
+MinCell_TileMatrix_6_chr6: length = 1
+[1] 1
+
+
+
+2021-11-18 16:18:08 : MaxCell_TileMatrix_6_chr6, Class = integer
+
+MaxCell_TileMatrix_6_chr6: length = 1
+[1] 3275
+
+
+2021-11-18 16:18:10 : Adding TileMatrix to scATAC_CD34_BMMC_R1 for Chr (7 of 23)!, 0.519 mins elapsed.
+
+2021-11-18 16:18:10 : NTiles_TileMatrix_7_chr7, Class = numeric
+
+NTiles_TileMatrix_7_chr7: length = 1
+  chr7 
+318278 
+
+
+
+2021-11-18 16:18:10 : NCells_TileMatrix_7_chr7, Class = integer
+
+NCells_TileMatrix_7_chr7: length = 1
+[1] 3275
+
+
+
+2021-11-18 16:18:10 : MinTile_TileMatrix_7_chr7, Class = numeric
+
+MinTile_TileMatrix_7_chr7: length = 1
+[1] 34
+
+
+
+2021-11-18 16:18:10 : MaxTile_TileMatrix_7_chr7, Class = numeric
+
+MaxTile_TileMatrix_7_chr7: length = 1
+[1] 318258
+
+
+
+2021-11-18 16:18:10 : MinCell_TileMatrix_7_chr7, Class = integer
+
+MinCell_TileMatrix_7_chr7: length = 1
+[1] 1
+
+
+
+2021-11-18 16:18:10 : MaxCell_TileMatrix_7_chr7, Class = integer
+
+MaxCell_TileMatrix_7_chr7: length = 1
+[1] 3275
+
+
+2021-11-18 16:18:13 : Adding TileMatrix to scATAC_CD34_BMMC_R1 for Chr (8 of 23)!, 0.559 mins elapsed.
+
+2021-11-18 16:18:13 : NTiles_TileMatrix_8_chr8, Class = numeric
+
+NTiles_TileMatrix_8_chr8: length = 1
+  chr8 
+292729 
+
+
+
+2021-11-18 16:18:13 : NCells_TileMatrix_8_chr8, Class = integer
+
+NCells_TileMatrix_8_chr8: length = 1
+[1] 3275
+
+
+
+2021-11-18 16:18:13 : MinTile_TileMatrix_8_chr8, Class = numeric
+
+MinTile_TileMatrix_8_chr8: length = 1
+[1] 43
+
+
+
+2021-11-18 16:18:13 : MaxTile_TileMatrix_8_chr8, Class = numeric
+
+MaxTile_TileMatrix_8_chr8: length = 1
+[1] 292608
+
+
+
+2021-11-18 16:18:13 : MinCell_TileMatrix_8_chr8, Class = integer
+
+MinCell_TileMatrix_8_chr8: length = 1
+[1] 1
+
+
+
+2021-11-18 16:18:13 : MaxCell_TileMatrix_8_chr8, Class = integer
+
+MaxCell_TileMatrix_8_chr8: length = 1
+[1] 3275
+
+
+2021-11-18 16:18:15 : Adding TileMatrix to scATAC_CD34_BMMC_R1 for Chr (9 of 23)!, 0.599 mins elapsed.
+
+2021-11-18 16:18:15 : NTiles_TileMatrix_9_chr9, Class = numeric
+
+NTiles_TileMatrix_9_chr9: length = 1
+  chr9 
+282427 
+
+
+
+2021-11-18 16:18:15 : NCells_TileMatrix_9_chr9, Class = integer
+
+NCells_TileMatrix_9_chr9: length = 1
+[1] 3275
+
+
+
+2021-11-18 16:18:15 : MinTile_TileMatrix_9_chr9, Class = numeric
+
+MinTile_TileMatrix_9_chr9: length = 1
+[1] 21
+
+
+
+2021-11-18 16:18:15 : MaxTile_TileMatrix_9_chr9, Class = numeric
+
+MaxTile_TileMatrix_9_chr9: length = 1
+[1] 282223
+
+
+
+2021-11-18 16:18:15 : MinCell_TileMatrix_9_chr9, Class = integer
+
+MinCell_TileMatrix_9_chr9: length = 1
+[1] 1
+
+
+
+2021-11-18 16:18:15 : MaxCell_TileMatrix_9_chr9, Class = integer
+
+MaxCell_TileMatrix_9_chr9: length = 1
+[1] 3275
+
+
+2021-11-18 16:18:17 : Adding TileMatrix to scATAC_CD34_BMMC_R1 for Chr (10 of 23)!, 0.641 mins elapsed.
+
+2021-11-18 16:18:18 : NTiles_TileMatrix_10_chr10, Class = numeric
+
+NTiles_TileMatrix_10_chr10: length = 1
+ chr10 
+271070 
+
+
+
+2021-11-18 16:18:18 : NCells_TileMatrix_10_chr10, Class = integer
+
+NCells_TileMatrix_10_chr10: length = 1
+[1] 3275
+
+
+
+2021-11-18 16:18:18 : MinTile_TileMatrix_10_chr10, Class = numeric
+
+MinTile_TileMatrix_10_chr10: length = 1
+[1] 156
+
+
+
+2021-11-18 16:18:18 : MaxTile_TileMatrix_10_chr10, Class = numeric
+
+MaxTile_TileMatrix_10_chr10: length = 1
+[1] 271049
+
+
+
+2021-11-18 16:18:18 : MinCell_TileMatrix_10_chr10, Class = integer
+
+MinCell_TileMatrix_10_chr10: length = 1
+[1] 1
+
+
+
+2021-11-18 16:18:18 : MaxCell_TileMatrix_10_chr10, Class = integer
+
+MaxCell_TileMatrix_10_chr10: length = 1
+[1] 3275
+
+
+2021-11-18 16:18:20 : Adding TileMatrix to scATAC_CD34_BMMC_R1 for Chr (11 of 23)!, 0.682 mins elapsed.
+
+2021-11-18 16:18:20 : NTiles_TileMatrix_11_chr11, Class = numeric
+
+NTiles_TileMatrix_11_chr11: length = 1
+ chr11 
+270014 
+
+
+
+2021-11-18 16:18:20 : NCells_TileMatrix_11_chr11, Class = integer
+
+NCells_TileMatrix_11_chr11: length = 1
+[1] 3275
+
+
+
+2021-11-18 16:18:20 : MinTile_TileMatrix_11_chr11, Class = numeric
+
+MinTile_TileMatrix_11_chr11: length = 1
+[1] 353
+
+
+
+2021-11-18 16:18:20 : MaxTile_TileMatrix_11_chr11, Class = numeric
+
+MaxTile_TileMatrix_11_chr11: length = 1
+[1] 269893
+
+
+
+2021-11-18 16:18:20 : MinCell_TileMatrix_11_chr11, Class = integer
+
+MinCell_TileMatrix_11_chr11: length = 1
+[1] 1
+
+
+
+2021-11-18 16:18:20 : MaxCell_TileMatrix_11_chr11, Class = integer
+
+MaxCell_TileMatrix_11_chr11: length = 1
+[1] 3275
+
+
+2021-11-18 16:18:23 : Adding TileMatrix to scATAC_CD34_BMMC_R1 for Chr (12 of 23)!, 0.729 mins elapsed.
+
+2021-11-18 16:18:23 : NTiles_TileMatrix_12_chr12, Class = numeric
+
+NTiles_TileMatrix_12_chr12: length = 1
+ chr12 
+267704 
+
+
+
+2021-11-18 16:18:23 : NCells_TileMatrix_12_chr12, Class = integer
+
+NCells_TileMatrix_12_chr12: length = 1
+[1] 3275
+
+
+
+2021-11-18 16:18:23 : MinTile_TileMatrix_12_chr12, Class = numeric
+
+MinTile_TileMatrix_12_chr12: length = 1
+[1] 134
+
+
+
+2021-11-18 16:18:23 : MaxTile_TileMatrix_12_chr12, Class = numeric
+
+MaxTile_TileMatrix_12_chr12: length = 1
+[1] 267682
+
+
+
+2021-11-18 16:18:23 : MinCell_TileMatrix_12_chr12, Class = integer
+
+MinCell_TileMatrix_12_chr12: length = 1
+[1] 1
+
+
+
+2021-11-18 16:18:23 : MaxCell_TileMatrix_12_chr12, Class = integer
+
+MaxCell_TileMatrix_12_chr12: length = 1
+[1] 3275
+
+
+2021-11-18 16:18:25 : Adding TileMatrix to scATAC_CD34_BMMC_R1 for Chr (13 of 23)!, 0.772 mins elapsed.
+
+2021-11-18 16:18:25 : NTiles_TileMatrix_13_chr13, Class = numeric
+
+NTiles_TileMatrix_13_chr13: length = 1
+ chr13 
+230340 
+
+
+
+2021-11-18 16:18:25 : NCells_TileMatrix_13_chr13, Class = integer
+
+NCells_TileMatrix_13_chr13: length = 1
+[1] 3275
+
+
+
+2021-11-18 16:18:25 : MinTile_TileMatrix_13_chr13, Class = numeric
+
+MinTile_TileMatrix_13_chr13: length = 1
+[1] 38152
+
+
+
+2021-11-18 16:18:25 : MaxTile_TileMatrix_13_chr13, Class = numeric
+
+MaxTile_TileMatrix_13_chr13: length = 1
+[1] 230220
+
+
+
+2021-11-18 16:18:25 : MinCell_TileMatrix_13_chr13, Class = integer
+
+MinCell_TileMatrix_13_chr13: length = 1
+[1] 1
+
+
+
+2021-11-18 16:18:25 : MaxCell_TileMatrix_13_chr13, Class = integer
+
+MaxCell_TileMatrix_13_chr13: length = 1
+[1] 3275
+
+
+2021-11-18 16:18:28 : Adding TileMatrix to scATAC_CD34_BMMC_R1 for Chr (14 of 23)!, 0.812 mins elapsed.
+
+2021-11-18 16:18:28 : NTiles_TileMatrix_14_chr14, Class = numeric
+
+NTiles_TileMatrix_14_chr14: length = 1
+ chr14 
+214700 
+
+
+
+2021-11-18 16:18:28 : NCells_TileMatrix_14_chr14, Class = integer
+
+NCells_TileMatrix_14_chr14: length = 1
+[1] 3275
+
+
+
+2021-11-18 16:18:28 : MinTile_TileMatrix_14_chr14, Class = numeric
+
+MinTile_TileMatrix_14_chr14: length = 1
+[1] 38003
+
+
+
+2021-11-18 16:18:28 : MaxTile_TileMatrix_14_chr14, Class = numeric
+
+MaxTile_TileMatrix_14_chr14: length = 1
+[1] 214578
+
+
+
+2021-11-18 16:18:28 : MinCell_TileMatrix_14_chr14, Class = integer
+
+MinCell_TileMatrix_14_chr14: length = 1
+[1] 1
+
+
+
+2021-11-18 16:18:28 : MaxCell_TileMatrix_14_chr14, Class = integer
+
+MaxCell_TileMatrix_14_chr14: length = 1
+[1] 3275
+
+
+2021-11-18 16:18:30 : Adding TileMatrix to scATAC_CD34_BMMC_R1 for Chr (15 of 23)!, 0.851 mins elapsed.
+
+2021-11-18 16:18:30 : NTiles_TileMatrix_15_chr15, Class = numeric
+
+NTiles_TileMatrix_15_chr15: length = 1
+ chr15 
+205063 
+
+
+
+2021-11-18 16:18:30 : NCells_TileMatrix_15_chr15, Class = integer
+
+NCells_TileMatrix_15_chr15: length = 1
+[1] 3275
+
+
+
+2021-11-18 16:18:30 : MinTile_TileMatrix_15_chr15, Class = numeric
+
+MinTile_TileMatrix_15_chr15: length = 1
+[1] 40007
+
+
+
+2021-11-18 16:18:30 : MaxTile_TileMatrix_15_chr15, Class = numeric
+
+MaxTile_TileMatrix_15_chr15: length = 1
+[1] 205042
+
+
+
+2021-11-18 16:18:30 : MinCell_TileMatrix_15_chr15, Class = integer
+
+MinCell_TileMatrix_15_chr15: length = 1
+[1] 1
+
+
+
+2021-11-18 16:18:30 : MaxCell_TileMatrix_15_chr15, Class = integer
+
+MaxCell_TileMatrix_15_chr15: length = 1
+[1] 3275
+
+
+2021-11-18 16:18:32 : Adding TileMatrix to scATAC_CD34_BMMC_R1 for Chr (16 of 23)!, 0.889 mins elapsed.
+
+2021-11-18 16:18:32 : NTiles_TileMatrix_16_chr16, Class = numeric
+
+NTiles_TileMatrix_16_chr16: length = 1
+ chr16 
+180710 
+
+
+
+2021-11-18 16:18:32 : NCells_TileMatrix_16_chr16, Class = integer
+
+NCells_TileMatrix_16_chr16: length = 1
+[1] 3275
+
+
+
+2021-11-18 16:18:32 : MinTile_TileMatrix_16_chr16, Class = numeric
+
+MinTile_TileMatrix_16_chr16: length = 1
+[1] 121
+
+
+
+2021-11-18 16:18:32 : MaxTile_TileMatrix_16_chr16, Class = numeric
+
+MaxTile_TileMatrix_16_chr16: length = 1
+[1] 180550
+
+
+
+2021-11-18 16:18:32 : MinCell_TileMatrix_16_chr16, Class = integer
+
+MinCell_TileMatrix_16_chr16: length = 1
+[1] 1
+
+
+
+2021-11-18 16:18:32 : MaxCell_TileMatrix_16_chr16, Class = integer
+
+MaxCell_TileMatrix_16_chr16: length = 1
+[1] 3275
+
+
+2021-11-18 16:18:35 : Adding TileMatrix to scATAC_CD34_BMMC_R1 for Chr (17 of 23)!, 0.929 mins elapsed.
+
+2021-11-18 16:18:35 : NTiles_TileMatrix_17_chr17, Class = numeric
+
+NTiles_TileMatrix_17_chr17: length = 1
+ chr17 
+162391 
+
+
+
+2021-11-18 16:18:35 : NCells_TileMatrix_17_chr17, Class = integer
+
+NCells_TileMatrix_17_chr17: length = 1
+[1] 3275
+
+
+
+2021-11-18 16:18:35 : MinTile_TileMatrix_17_chr17, Class = numeric
+
+MinTile_TileMatrix_17_chr17: length = 1
+[1] 2
+
+
+
+2021-11-18 16:18:35 : MaxTile_TileMatrix_17_chr17, Class = numeric
+
+MaxTile_TileMatrix_17_chr17: length = 1
+[1] 162320
+
+
+
+2021-11-18 16:18:35 : MinCell_TileMatrix_17_chr17, Class = integer
+
+MinCell_TileMatrix_17_chr17: length = 1
+[1] 1
+
+
+
+2021-11-18 16:18:35 : MaxCell_TileMatrix_17_chr17, Class = integer
+
+MaxCell_TileMatrix_17_chr17: length = 1
+[1] 3275
+
+
+2021-11-18 16:18:37 : Adding TileMatrix to scATAC_CD34_BMMC_R1 for Chr (18 of 23)!, 0.973 mins elapsed.
+
+2021-11-18 16:18:37 : NTiles_TileMatrix_18_chr18, Class = numeric
+
+NTiles_TileMatrix_18_chr18: length = 1
+ chr18 
+156155 
+
+
+
+2021-11-18 16:18:37 : NCells_TileMatrix_18_chr18, Class = integer
+
+NCells_TileMatrix_18_chr18: length = 1
+[1] 3275
+
+
+
+2021-11-18 16:18:37 : MinTile_TileMatrix_18_chr18, Class = numeric
+
+MinTile_TileMatrix_18_chr18: length = 1
+[1] 21
+
+
+
+2021-11-18 16:18:37 : MaxTile_TileMatrix_18_chr18, Class = numeric
+
+MaxTile_TileMatrix_18_chr18: length = 1
+[1] 156033
+
+
+
+2021-11-18 16:18:37 : MinCell_TileMatrix_18_chr18, Class = integer
+
+MinCell_TileMatrix_18_chr18: length = 1
+[1] 1
+
+
+
+2021-11-18 16:18:37 : MaxCell_TileMatrix_18_chr18, Class = integer
+
+MaxCell_TileMatrix_18_chr18: length = 1
+[1] 3275
+
+
+2021-11-18 16:18:40 : Adding TileMatrix to scATAC_CD34_BMMC_R1 for Chr (19 of 23)!, 1.013 mins elapsed.
+
+2021-11-18 16:18:40 : NTiles_TileMatrix_19_chr19, Class = numeric
+
+NTiles_TileMatrix_19_chr19: length = 1
+ chr19 
+118258 
+
+
+
+2021-11-18 16:18:40 : NCells_TileMatrix_19_chr19, Class = integer
+
+NCells_TileMatrix_19_chr19: length = 1
+[1] 3275
+
+
+
+2021-11-18 16:18:40 : MinTile_TileMatrix_19_chr19, Class = numeric
+
+MinTile_TileMatrix_19_chr19: length = 1
+[1] 179
+
+
+
+2021-11-18 16:18:40 : MaxTile_TileMatrix_19_chr19, Class = numeric
+
+MaxTile_TileMatrix_19_chr19: length = 1
+[1] 118238
+
+
+
+2021-11-18 16:18:40 : MinCell_TileMatrix_19_chr19, Class = integer
+
+MinCell_TileMatrix_19_chr19: length = 1
+[1] 1
+
+
+
+2021-11-18 16:18:40 : MaxCell_TileMatrix_19_chr19, Class = integer
+
+MaxCell_TileMatrix_19_chr19: length = 1
+[1] 3275
+
+
+2021-11-18 16:18:42 : Adding TileMatrix to scATAC_CD34_BMMC_R1 for Chr (20 of 23)!, 1.052 mins elapsed.
+
+2021-11-18 16:18:42 : NTiles_TileMatrix_20_chr20, Class = numeric
+
+NTiles_TileMatrix_20_chr20: length = 1
+ chr20 
+126052 
+
+
+
+2021-11-18 16:18:42 : NCells_TileMatrix_20_chr20, Class = integer
+
+NCells_TileMatrix_20_chr20: length = 1
+[1] 3275
+
+
+
+2021-11-18 16:18:42 : MinTile_TileMatrix_20_chr20, Class = numeric
+
+MinTile_TileMatrix_20_chr20: length = 1
+[1] 121
+
+
+
+2021-11-18 16:18:42 : MaxTile_TileMatrix_20_chr20, Class = numeric
+
+MaxTile_TileMatrix_20_chr20: length = 1
+[1] 125931
+
+
+
+2021-11-18 16:18:42 : MinCell_TileMatrix_20_chr20, Class = integer
+
+MinCell_TileMatrix_20_chr20: length = 1
+[1] 1
+
+
+
+2021-11-18 16:18:42 : MaxCell_TileMatrix_20_chr20, Class = integer
+
+MaxCell_TileMatrix_20_chr20: length = 1
+[1] 3275
+
+
+2021-11-18 16:18:44 : Adding TileMatrix to scATAC_CD34_BMMC_R1 for Chr (21 of 23)!, 1.09 mins elapsed.
+
+2021-11-18 16:18:44 : NTiles_TileMatrix_21_chr21, Class = numeric
+
+NTiles_TileMatrix_21_chr21: length = 1
+chr21 
+96260 
+
+
+
+2021-11-18 16:18:44 : NCells_TileMatrix_21_chr21, Class = integer
+
+NCells_TileMatrix_21_chr21: length = 1
+[1] 3275
+
+
+
+2021-11-18 16:18:44 : MinTile_TileMatrix_21_chr21, Class = numeric
+
+MinTile_TileMatrix_21_chr21: length = 1
+[1] 18897
+
+
+
+2021-11-18 16:18:44 : MaxTile_TileMatrix_21_chr21, Class = numeric
+
+MaxTile_TileMatrix_21_chr21: length = 1
+[1] 96201
+
+
+
+2021-11-18 16:18:44 : MinCell_TileMatrix_21_chr21, Class = integer
+
+MinCell_TileMatrix_21_chr21: length = 1
+[1] 1
+
+
+
+2021-11-18 16:18:44 : MaxCell_TileMatrix_21_chr21, Class = integer
+
+MaxCell_TileMatrix_21_chr21: length = 1
+[1] 3275
+
+
+2021-11-18 16:18:47 : Adding TileMatrix to scATAC_CD34_BMMC_R1 for Chr (22 of 23)!, 1.127 mins elapsed.
+
+2021-11-18 16:18:47 : NTiles_TileMatrix_22_chr22, Class = numeric
+
+NTiles_TileMatrix_22_chr22: length = 1
+ chr22 
+102610 
+
+
+
+2021-11-18 16:18:47 : NCells_TileMatrix_22_chr22, Class = integer
+
+NCells_TileMatrix_22_chr22: length = 1
+[1] 3275
+
+
+
+2021-11-18 16:18:47 : MinTile_TileMatrix_22_chr22, Class = numeric
+
+MinTile_TileMatrix_22_chr22: length = 1
+[1] 32106
+
+
+
+2021-11-18 16:18:47 : MaxTile_TileMatrix_22_chr22, Class = numeric
+
+MaxTile_TileMatrix_22_chr22: length = 1
+[1] 102480
+
+
+
+2021-11-18 16:18:47 : MinCell_TileMatrix_22_chr22, Class = integer
+
+MinCell_TileMatrix_22_chr22: length = 1
+[1] 1
+
+
+
+2021-11-18 16:18:47 : MaxCell_TileMatrix_22_chr22, Class = integer
+
+MaxCell_TileMatrix_22_chr22: length = 1
+[1] 3275
+
+
+2021-11-18 16:18:49 : Adding TileMatrix to scATAC_CD34_BMMC_R1 for Chr (23 of 23)!, 1.167 mins elapsed.
+
+2021-11-18 16:18:49 : NTiles_TileMatrix_23_chrX, Class = numeric
+
+NTiles_TileMatrix_23_chrX: length = 1
+  chrX 
+310542 
+
+
+
+2021-11-18 16:18:49 : NCells_TileMatrix_23_chrX, Class = integer
+
+NCells_TileMatrix_23_chrX: length = 1
+[1] 3275
+
+
+
+2021-11-18 16:18:49 : MinTile_TileMatrix_23_chrX, Class = numeric
+
+MinTile_TileMatrix_23_chrX: length = 1
+[1] 121
+
+
+
+2021-11-18 16:18:49 : MaxTile_TileMatrix_23_chrX, Class = numeric
+
+MaxTile_TileMatrix_23_chrX: length = 1
+[1] 258611
+
+
+
+2021-11-18 16:18:49 : MinCell_TileMatrix_23_chrX, Class = integer
+
+MinCell_TileMatrix_23_chrX: length = 1
+[1] 1
+
+
+
+2021-11-18 16:18:49 : MaxCell_TileMatrix_23_chrX, Class = integer
+
+MaxCell_TileMatrix_23_chrX: length = 1
+[1] 3275
+
+
+2021-11-18 16:18:52 : (scATAC_CD34_BMMC_R1 : 1 of 3) Finished Adding TileMatrix!, 6.033 mins elapsed.
+2021-11-18 16:18:52 : (scATAC_CD34_BMMC_R1 : 1 of 3) Adding GeneScoreMatrix!, 6.033 mins elapsed.
+
+2021-11-18 16:18:52 : scATAC_CD34_BMMC_R1 .addGeneScoreMat geneRegions, Class = GRanges
+GRanges object with 23127 ranges and 5 metadata columns:
+          seqnames              ranges strand |     gene_id       symbol geneStart   geneEnd       geneWeight
+             <Rle>           <IRanges>  <Rle> | <character>  <character> <integer> <integer>        <numeric>
+      [1]     chr1          6874-14409      + |   100287102      DDX11L1     11874     14409 3.66509653350314
+      [2]     chr1         14362-34961      - |      653635       WASH7P     29961     14362 1.97495958623688
+      [3]     chr1         64091-70008      + |       79501        OR4F5     69091     70008 4.39374239210538
+      [4]     chr1       134773-145566      - |      729737    LOC729737    140566    134773 2.86067884718174
+      [5]     chr1       700245-719068      - |   100288069 LOC100288069    714068    700245 2.06694472356989
+      ...      ...                 ...    ... .         ...          ...       ...       ...              ...
+  [23123]     chrX 154294695-154351349      + |       79184        BRCC3 154299695 154351349 1.35449947006407
+  [23124]     chrX 154439701-154468098      + |        7411         VBP1 154444701 154468098 1.70723880120007
+  [23125]     chrX 154487526-154498852      - |      116442       RAB39B 154493852 154487526 2.77312328740882
+  [23126]     chrX 154505500-154568986      - |        1193        CLIC2 154563986 154505500 1.31635086673618
+  [23127]     chrX 154718673-154847622      - |       55217        TMLHE 154842622 154718673 1.15575158958108
+  -------
+  seqinfo: 23 sequences from hg19 genome
+
+2021-11-18 16:18:52 : Creating Temp GeneScoreMatrix for scATAC_CD34_BMMC_R1, Chr (1 of 23)!, 0 mins elapsed.
+2021-11-18 16:18:55 : Creating Temp GeneScoreMatrix for scATAC_CD34_BMMC_R1, Chr (2 of 23)!, 0.05 mins elapsed.
+2021-11-18 16:18:58 : Creating Temp GeneScoreMatrix for scATAC_CD34_BMMC_R1, Chr (3 of 23)!, 0.094 mins elapsed.
+2021-11-18 16:19:01 : Creating Temp GeneScoreMatrix for scATAC_CD34_BMMC_R1, Chr (4 of 23)!, 0.138 mins elapsed.
+2021-11-18 16:19:03 : Creating Temp GeneScoreMatrix for scATAC_CD34_BMMC_R1, Chr (5 of 23)!, 0.178 mins elapsed.
+2021-11-18 16:19:05 : Creating Temp GeneScoreMatrix for scATAC_CD34_BMMC_R1, Chr (6 of 23)!, 0.217 mins elapsed.
+2021-11-18 16:19:08 : Creating Temp GeneScoreMatrix for scATAC_CD34_BMMC_R1, Chr (7 of 23)!, 0.255 mins elapsed.
+2021-11-18 16:19:10 : Creating Temp GeneScoreMatrix for scATAC_CD34_BMMC_R1, Chr (8 of 23)!, 0.292 mins elapsed.
+2021-11-18 16:19:12 : Creating Temp GeneScoreMatrix for scATAC_CD34_BMMC_R1, Chr (9 of 23)!, 0.328 mins elapsed.
+2021-11-18 16:19:14 : Creating Temp GeneScoreMatrix for scATAC_CD34_BMMC_R1, Chr (10 of 23)!, 0.364 mins elapsed.
+2021-11-18 16:19:16 : Creating Temp GeneScoreMatrix for scATAC_CD34_BMMC_R1, Chr (11 of 23)!, 0.401 mins elapsed.
+2021-11-18 16:19:19 : Creating Temp GeneScoreMatrix for scATAC_CD34_BMMC_R1, Chr (12 of 23)!, 0.438 mins elapsed.
+2021-11-18 16:19:21 : Creating Temp GeneScoreMatrix for scATAC_CD34_BMMC_R1, Chr (13 of 23)!, 0.475 mins elapsed.
+2021-11-18 16:19:23 : Creating Temp GeneScoreMatrix for scATAC_CD34_BMMC_R1, Chr (14 of 23)!, 0.508 mins elapsed.
+2021-11-18 16:19:25 : Creating Temp GeneScoreMatrix for scATAC_CD34_BMMC_R1, Chr (15 of 23)!, 0.542 mins elapsed.
+2021-11-18 16:19:27 : Creating Temp GeneScoreMatrix for scATAC_CD34_BMMC_R1, Chr (16 of 23)!, 0.576 mins elapsed.
+2021-11-18 16:19:29 : Creating Temp GeneScoreMatrix for scATAC_CD34_BMMC_R1, Chr (17 of 23)!, 0.611 mins elapsed.
+2021-11-18 16:19:31 : Creating Temp GeneScoreMatrix for scATAC_CD34_BMMC_R1, Chr (18 of 23)!, 0.647 mins elapsed.
+2021-11-18 16:19:33 : Creating Temp GeneScoreMatrix for scATAC_CD34_BMMC_R1, Chr (19 of 23)!, 0.679 mins elapsed.
+2021-11-18 16:19:35 : Creating Temp GeneScoreMatrix for scATAC_CD34_BMMC_R1, Chr (20 of 23)!, 0.715 mins elapsed.
+2021-11-18 16:19:37 : Creating Temp GeneScoreMatrix for scATAC_CD34_BMMC_R1, Chr (21 of 23)!, 0.748 mins elapsed.
+2021-11-18 16:19:39 : Creating Temp GeneScoreMatrix for scATAC_CD34_BMMC_R1, Chr (22 of 23)!, 0.78 mins elapsed.
+2021-11-18 16:19:41 : Creating Temp GeneScoreMatrix for scATAC_CD34_BMMC_R1, Chr (23 of 23)!, 0.813 mins elapsed.
+
+2021-11-18 16:19:43 : scATAC_CD34_BMMC_R1 .addGeneScoreMat FeatureDF, Class = data.frame
+scATAC_CD34_BMMC_R1 .addGeneScoreMat FeatureDF: nRows = 23127, nCols = 6
+  seqnames  start    end strand         name idx
+1     chr1  11874  14409      1      DDX11L1   1
+2     chr1  29961  14362      2       WASH7P   2
+3     chr1  69091  70008      1        OR4F5   3
+4     chr1 140566 134773      2    LOC729737   4
+5     chr1 714068 700245      2 LOC100288069   5
+6     chr1 762971 794826      1    LINC01128   6
+
+
+2021-11-18 16:19:44 : Adding GeneScoreMatrix to scATAC_CD34_BMMC_R1 for Chr (1 of 23)!, 0.866 mins elapsed.
+2021-11-18 16:19:45 : Adding GeneScoreMatrix to scATAC_CD34_BMMC_R1 for Chr (2 of 23)!, 0.882 mins elapsed.
+2021-11-18 16:19:46 : Adding GeneScoreMatrix to scATAC_CD34_BMMC_R1 for Chr (3 of 23)!, 0.895 mins elapsed.
+2021-11-18 16:19:47 : Adding GeneScoreMatrix to scATAC_CD34_BMMC_R1 for Chr (4 of 23)!, 0.919 mins elapsed.
+2021-11-18 16:19:48 : Adding GeneScoreMatrix to scATAC_CD34_BMMC_R1 for Chr (5 of 23)!, 0.931 mins elapsed.
+2021-11-18 16:19:49 : Adding GeneScoreMatrix to scATAC_CD34_BMMC_R1 for Chr (6 of 23)!, 0.943 mins elapsed.
+2021-11-18 16:19:50 : Adding GeneScoreMatrix to scATAC_CD34_BMMC_R1 for Chr (7 of 23)!, 0.966 mins elapsed.
+2021-11-18 16:19:51 : Adding GeneScoreMatrix to scATAC_CD34_BMMC_R1 for Chr (8 of 23)!, 0.979 mins elapsed.
+2021-11-18 16:19:52 : Adding GeneScoreMatrix to scATAC_CD34_BMMC_R1 for Chr (9 of 23)!, 0.991 mins elapsed.
+2021-11-18 16:19:53 : Adding GeneScoreMatrix to scATAC_CD34_BMMC_R1 for Chr (10 of 23)!, 1.013 mins elapsed.
+2021-11-18 16:19:54 : Adding GeneScoreMatrix to scATAC_CD34_BMMC_R1 for Chr (11 of 23)!, 1.025 mins elapsed.
+2021-11-18 16:19:55 : Adding GeneScoreMatrix to scATAC_CD34_BMMC_R1 for Chr (12 of 23)!, 1.038 mins elapsed.
+2021-11-18 16:19:56 : Adding GeneScoreMatrix to scATAC_CD34_BMMC_R1 for Chr (13 of 23)!, 1.06 mins elapsed.
+2021-11-18 16:19:57 : Adding GeneScoreMatrix to scATAC_CD34_BMMC_R1 for Chr (14 of 23)!, 1.072 mins elapsed.
+2021-11-18 16:19:57 : Adding GeneScoreMatrix to scATAC_CD34_BMMC_R1 for Chr (15 of 23)!, 1.084 mins elapsed.
+2021-11-18 16:19:59 : Adding GeneScoreMatrix to scATAC_CD34_BMMC_R1 for Chr (16 of 23)!, 1.105 mins elapsed.
+2021-11-18 16:19:59 : Adding GeneScoreMatrix to scATAC_CD34_BMMC_R1 for Chr (17 of 23)!, 1.118 mins elapsed.
+2021-11-18 16:20:00 : Adding GeneScoreMatrix to scATAC_CD34_BMMC_R1 for Chr (18 of 23)!, 1.131 mins elapsed.
+2021-11-18 16:20:01 : Adding GeneScoreMatrix to scATAC_CD34_BMMC_R1 for Chr (19 of 23)!, 1.152 mins elapsed.
+2021-11-18 16:20:02 : Adding GeneScoreMatrix to scATAC_CD34_BMMC_R1 for Chr (20 of 23)!, 1.166 mins elapsed.
+2021-11-18 16:20:03 : Adding GeneScoreMatrix to scATAC_CD34_BMMC_R1 for Chr (21 of 23)!, 1.177 mins elapsed.
+2021-11-18 16:20:04 : Adding GeneScoreMatrix to scATAC_CD34_BMMC_R1 for Chr (22 of 23)!, 1.198 mins elapsed.
+2021-11-18 16:20:05 : Adding GeneScoreMatrix to scATAC_CD34_BMMC_R1 for Chr (23 of 23)!, 1.21 mins elapsed.
+2021-11-18 16:20:07 : (scATAC_CD34_BMMC_R1 : 1 of 3) Finished Adding GeneScoreMatrix!, 7.278 mins elapsed.
+2021-11-18 16:20:07 : (scATAC_CD34_BMMC_R1 : 1 of 3) Finished Creating Arrow File, 7.278 mins elapsed.
+
+###########
+2021-11-18 16:20:07 : Creating Arrow File scATAC_BMMC_R1.arrow (scATAC_BMMC_R1 : 2 of 3)
+###########
+
+
+2021-11-18 16:20:07 : validBC, Class = NULL
+
+validBC: length = 0
+NULL
+
+
+
+2021-11-18 16:20:07 : (scATAC_BMMC_R1 : 2 of 3) Determining Arrow Method to use!
+
+2021-11-18 16:20:11 : createArrowFiles has encountered an error, checking if any ArrowFiles completed..
+
+------- Completed
+
+End Time : 2021-11-18 16:20:11
+Elapsed Time Minutes = 7.35024804671605
+Elapsed Time Hours = 0.122504417763816
+
+-------
+
+
+

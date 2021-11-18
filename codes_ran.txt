@@ -1,0 +1,62 @@
+> addArchRThreads(threads = 1) 
+Setting default number of Parallel threads to 1.
+> inputFiles <- getTutorialData("Hematopoiesis")
+> inputFiles
+                                      scATAC_BMMC_R1                                  scATAC_CD34_BMMC_R1 
+     "HemeFragments/scATAC_BMMC_R1.fragments.tsv.gz" "HemeFragments/scATAC_CD34_BMMC_R1.fragments.tsv.gz" 
+                                      scATAC_PBMC_R1 
+     "HemeFragments/scATAC_PBMC_R1.fragments.tsv.gz" 
+> addArchRGenome("hg19")
+Setting default genome to Hg19.
+> set.seed(1)
+> ArrowFiles <- createArrowFiles(
++   inputFiles = inputFiles,
++   sampleNames = names(inputFiles),
++   filterTSS = 4, #Dont set this too high because you can always increase later
++   filterFrags = 1000, 
++   addTileMat = TRUE,
++   addGeneScoreMat = TRUE,
++   force = TRUE
++ )
+filterFrags is no longer a valid input. Please use minFrags! Setting filterFrags value to minFrags!
+filterTSS is no longer a valid input. Please use minTSS! Setting filterTSS value to minTSS!
+Using GeneAnnotation set by addArchRGenome(Hg19)!
+Using GeneAnnotation set by addArchRGenome(Hg19)!
+ArchR logging to : ArchRLogs/ArchR-createArrows-978c4647a912e-Date-2021-11-18_Time-16-12-50.log
+If there is an issue, please report to github with logFile!
+2021-11-18 16:12:50 : Batch Execution w/ safelapply!, 0 mins elapsed.
+2021-11-18 16:12:50 : (scATAC_CD34_BMMC_R1 : 1 of 3) Arrow Exists! Overriding since force = TRUE!, 0.001 mins elapsed.
+2021-11-18 16:12:50 : (scATAC_CD34_BMMC_R1 : 1 of 3) Reading In Fragments from inputFiles (readMethod = tabix), 0.001 mins elapsed.
+2021-11-18 16:12:50 : (scATAC_CD34_BMMC_R1 : 1 of 3) Tabix Bed To Temporary File, 0.001 mins elapsed.
+2021-11-18 16:13:05 : (scATAC_CD34_BMMC_R1 : 1 of 3) Reading TabixFile 8 Percent, 0.251 mins elapsed.
+2021-11-18 16:13:17 : (scATAC_CD34_BMMC_R1 : 1 of 3) Reading TabixFile 17 Percent, 0.454 mins elapsed.
+2021-11-18 16:13:29 : (scATAC_CD34_BMMC_R1 : 1 of 3) Reading TabixFile 25 Percent, 0.643 mins elapsed.
+2021-11-18 16:13:40 : (scATAC_CD34_BMMC_R1 : 1 of 3) Reading TabixFile 33 Percent, 0.837 mins elapsed.
+2021-11-18 16:13:53 : (scATAC_CD34_BMMC_R1 : 1 of 3) Reading TabixFile 42 Percent, 1.049 mins elapsed.
+2021-11-18 16:14:07 : (scATAC_CD34_BMMC_R1 : 1 of 3) Reading TabixFile 50 Percent, 1.275 mins elapsed.
+2021-11-18 16:14:19 : (scATAC_CD34_BMMC_R1 : 1 of 3) Reading TabixFile 58 Percent, 1.478 mins elapsed.
+2021-11-18 16:14:31 : (scATAC_CD34_BMMC_R1 : 1 of 3) Reading TabixFile 67 Percent, 1.674 mins elapsed.
+2021-11-18 16:14:43 : (scATAC_CD34_BMMC_R1 : 1 of 3) Reading TabixFile 75 Percent, 1.89 mins elapsed.
+2021-11-18 16:14:54 : (scATAC_CD34_BMMC_R1 : 1 of 3) Reading TabixFile 83 Percent, 2.067 mins elapsed.
+2021-11-18 16:15:02 : (scATAC_CD34_BMMC_R1 : 1 of 3) Reading TabixFile 92 Percent, 2.204 mins elapsed.
+2021-11-18 16:15:08 : (scATAC_CD34_BMMC_R1 : 1 of 3) Reading TabixFile 100 Percent, 2.302 mins elapsed.
+2021-11-18 16:15:08 : (scATAC_CD34_BMMC_R1 : 1 of 3) Successful creation of Temporary File, 2.303 mins elapsed.
+2021-11-18 16:15:08 : (scATAC_CD34_BMMC_R1 : 1 of 3) Creating ArrowFile From Temporary File, 2.303 mins elapsed.
+2021-11-18 16:15:40 : (scATAC_CD34_BMMC_R1 : 1 of 3) Successful creation of Arrow File, 2.839 mins elapsed.
+2021-11-18 16:16:33 : (scATAC_CD34_BMMC_R1 : 1 of 3) CellStats : Number of Cells Pass Filter = 3275 , 3.708 mins elapsed.
+2021-11-18 16:16:33 : (scATAC_CD34_BMMC_R1 : 1 of 3) CellStats : Median Frags = 3163 , 3.708 mins elapsed.
+2021-11-18 16:16:33 : (scATAC_CD34_BMMC_R1 : 1 of 3) CellStats : Median TSS Enrichment = 16.726 , 3.708 mins elapsed.
+WARNING: Error found with Cairo installation. Continuing without rasterization.
+2021-11-18 16:16:34 : (scATAC_CD34_BMMC_R1 : 1 of 3) Adding Additional Feature Counts!, 3.729 mins elapsed.
+2021-11-18 16:17:21 : (scATAC_CD34_BMMC_R1 : 1 of 3) Removing Fragments from Filtered Cells, 4.522 mins elapsed.
+2021-11-18 16:17:21 : (scATAC_CD34_BMMC_R1 : 1 of 3) Creating Filtered Arrow File, 4.522 mins elapsed.
+2021-11-18 16:17:39 : (scATAC_CD34_BMMC_R1 : 1 of 3) Finished Constructing Filtered Arrow File!, 4.815 mins elapsed.
+2021-11-18 16:17:39 : (scATAC_CD34_BMMC_R1 : 1 of 3) Adding TileMatrix!, 4.816 mins elapsed.
+2021-11-18 16:18:52 : (scATAC_CD34_BMMC_R1 : 1 of 3) Adding GeneScoreMatrix!, 6.033 mins elapsed.
+2021-11-18 16:20:07 : (scATAC_CD34_BMMC_R1 : 1 of 3) Finished Creating Arrow File, 7.278 mins elapsed.
+Attempting to index HemeFragments/scATAC_BMMC_R1.fragments.tsv.gz as tabix..
+[E::hts_idx_push] Unsorted positions on sequence #14: 31091455 followed by 310915
+2021-11-18 16:20:11 : createArrowFiles has encountered an error, checking if any ArrowFiles completed..
+ArchR logging successful to : ArchRLogs/ArchR-createArrows-978c4647a912e-Date-2021-11-18_Time-16-12-50.log
+Warning message:
+package ‘gridExtra’ was built under R version 3.6.3 
